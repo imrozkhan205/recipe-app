@@ -3,12 +3,14 @@ import dotenv from 'dotenv'
 import { db } from './config/db.js'
 import {favoritesTable} from './db/schema.js'
 import { and, eq } from 'drizzle-orm'
+import job from './config/cron.js'
+
 
 dotenv.config()
 const PORT = process.env.PORT
-
-
 const app = express();
+
+if (process.env.NODE_ENV === "production") job.start()
 app.use(express.json())
 
 app.get("/api/health", (req, res) => {
