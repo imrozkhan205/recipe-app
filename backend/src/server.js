@@ -11,6 +11,10 @@ const PORT = process.env.PORT
 const app = express();
 app.use(express.json())
 
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ success: true });
+});
+
 app.post('/api/favorites', async(req, res) => {
     
     try {
